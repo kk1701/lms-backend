@@ -2,6 +2,7 @@ import cookieParser from 'cookie-parser';
 import express from 'express'
 import cors from 'cors'
 import userRoutes from './routes/userRoutes.js'
+import courseRoutes from './routes/courseRoutes.js'
 import errorMiddleware from './middlewares/errorMiddleware.js';
 import morgan from 'morgan';
 
@@ -24,6 +25,7 @@ app.get('/ping', ( req, res) => {
 
 // 3route config
 app.use('/user', userRoutes);
+app.use('/courses', courseRoutes);
 
 app.get('*', (req, res) => {
     res.status(404).send('404 Page Not Found')
