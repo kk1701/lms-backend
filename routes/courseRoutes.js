@@ -1,10 +1,9 @@
-import express from 'express'
 import { Router } from 'express'
 import { addLectureToCourseById, createCourse, deleteCourse, getAllCourses, getLecturesByCourseId, updateCourse } from '../controllers/courseControllers.js'
-import { isLoggedIn, authorizedRoles } from '../middlewares/authMiddleware.js'
+import { isLoggedIn, authorizedRoles, authorizedSubscriber } from '../middlewares/authMiddleware.js'
 import upload from '../middlewares/multerMiddleware.js'
 
-const router = express.Router()
+const router = Router()
 
 router
     .route('/')
@@ -20,7 +19,7 @@ router
     .route('/:courseId')
     .get( 
         isLoggedIn,
-        authorizedRoles('ADMIN'),
+        authorizedSubscriber,
         getLecturesByCourseId
     )
     .put( 

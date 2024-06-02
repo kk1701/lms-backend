@@ -3,6 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import userRoutes from './routes/userRoutes.js'
 import courseRoutes from './routes/courseRoutes.js'
+import paymentRoutes from './routes/paymentRoutes.js'
 import errorMiddleware from './middlewares/errorMiddleware.js';
 import morgan from 'morgan';
 
@@ -26,6 +27,7 @@ app.get('/ping', ( req, res) => {
 // 3route config
 app.use('/user', userRoutes);
 app.use('/courses', courseRoutes);
+app.use('/payments', paymentRoutes);
 
 app.get('*', (req, res) => {
     res.status(404).send('404 Page Not Found')

@@ -28,9 +28,21 @@ const authorizedRoles = (...roles) => (req, res, next) => {
     next();
 }
 
+const authorizedSubscriber = async (req, res, next) => {
+    const subscriptionStatus = req.user.subsciption.status
+    const currentRole = req.user.role
+
+    if( currentRole !== 'ADMIN' && subscriptionStatus !== 'active'){
+        return next(new appError('Please subscribe to access this course!', 403))
+    }
+
+    next()
+}
+
 export{
     isLoggedIn,
-    authorizedRoles
+    authorizedRoles,
+    authorizedSubscriber
 }   
 
 
